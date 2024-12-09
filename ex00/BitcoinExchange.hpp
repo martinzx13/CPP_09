@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <map>
+#include <fstream>
 
 class BitcoinExchange {
 public:
@@ -15,10 +16,13 @@ public:
   //_______ Destructor.
   ~BitcoinExchange();
 
-  void readBitcoinFile();
+  //_______ Member Functions.
+
+  //_______ Read File
+  void readBitcoinFile(const std::string &fileName);
 
   void readSearchingFile();
 
 private:
-    std::map<std::string, float> bitcoinValue;
+    std::map<std::string, float> _bitcoinData;
 };

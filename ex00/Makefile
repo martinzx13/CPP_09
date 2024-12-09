@@ -21,7 +21,7 @@ NAME:= btc
 
 all:$(NAME)
 
-$(NAME):$(OBJ)$(HEADER)
+$(NAME):$(OBJ) $(HEADER)
 	$(CPP) $(CPP_FLAGS) -o $(NAME) $(OBJ)
 
 %.o:%.cpp
