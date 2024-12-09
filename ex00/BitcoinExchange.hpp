@@ -1,8 +1,11 @@
 #pragma once
 
 #include <iostream>
-#include <map>
 #include <fstream>
+#include <sstream>
+#include <string>
+#include <map>
+#include <stdexcept>
 
 class BitcoinExchange {
 public:
@@ -18,11 +21,12 @@ public:
 
   //_______ Member Functions.
 
-  //_______ Read File
+  //_______ Read Files
   void readBitcoinFile(const std::string &fileName);
-
-  void readSearchingFile();
+  void readSearchingFile(const std::string &fileQuery);
+  float getPrice(const std::string &_date);
 
 private:
-    std::map<std::string, float> _bitcoinData;
+  std::map<std::string, float> _bitcoinData;
+  std::map<std::string, float> _queryData;
 };

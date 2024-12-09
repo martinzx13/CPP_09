@@ -8,6 +8,8 @@ int main(int arg, char *argv[])
 
     BitcoinExchange bitConvert;
 
-    bitConvert.readBitcoinFile(argv[1]);
+    bitConvert.readBitcoinFile("data.csv");
     //2. Check the open file function.
+    bitConvert.readSearchingFile(argv[1]);
+    
 }
