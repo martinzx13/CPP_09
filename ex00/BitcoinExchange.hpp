@@ -26,6 +26,12 @@ public:
   void readSearchingFile(const std::string &fileQuery);
   float getPrice(const std::string &_date);
 
+  //_______ Search Value
+  void searchValue();
+  void createOutputFile(const std::string &fileName, const std::map<std::string, float> &data);
+
+  //_______ Getters
+  std::map<std::string, float> getQueryData();
 private:
   std::map<std::string, float> _bitcoinData;
   std::map<std::string, float> _queryData;

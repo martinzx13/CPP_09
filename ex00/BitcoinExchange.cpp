@@ -43,8 +43,6 @@ void BitcoinExchange::readBitcoinFile(const std::string &fileName) {
     }
     _bitcoinData[date] = value;
   }
-
-  std::cout << _bitcoinData[date] << std::endl;
 }
 
 void BitcoinExchange::readSearchingFile(const std::string &fileQuery) {
@@ -64,16 +62,48 @@ void BitcoinExchange::readSearchingFile(const std::string &fileQuery) {
       iss.str(line.substr(position + 1));
       iss >> value;
     }
-    _queryData[date] = value;
+      _queryData[date] = value;
   }
-  std::cout << "Date found : " << getPrice(date) << std::endl;
-
 }
 
-float BitcoinExchange::getPrice(const std::string &_date)
-{
+float BitcoinExchange::getPrice(const std::string &_date) {
     std::map<std::string, float>::const_iterator it = _bitcoinData.find(_date);
-    if(it != _bitcoinData.end())
-        return (it->second);
+    if (it != _bitcoinData.end())
+        return it->second;
+
+    // If the exact date is not found, find the closest previous date
+    it = _bitcoinData.lower_bound(_date);
+    if (it != _bitcoinData.begin()) {
+        --it;
+        return it->second;
+    }
     return 0;
 }
+
+void BitcoinExchange::searchValue()
+{
+  std::map<std::string, float>::iterator it;
+  for (it = _queryData.begin(); it != _queryData.end(); it++)
+  {
+    float price = getPrice(it->first);
+    if (price != 0)
+      it->second = price;
+  }
+}
+
+void BitcoinExchange::createOutputFile(const std::string &fileName, const std::map<std::string, float> &data)
+{
+  std::ofstream output(fileName.c_str());
+  if (!output.is_open())
+    throw(std::runtime_error("Error could not open the file"));
+
+  std::map<std::string, float>::const_iterator it;
+  for (it = data.begin(); it != data.end(); it++)
+  {
+    output << it->first << "," << it->second << std::endl;
+  }
+}
+std::map<std::string, float> BitcoinExchange::getQueryData()
+  {
+    return _queryData;
+  }
