@@ -32,9 +32,8 @@ void BitcoinExchange::readBitcoinFile(const std::string &fileName) {
   std::string date;
 
   if (!bitFile.is_open())
-    throw(std::runtime_error("Error Could not open the file"));
-
-  std::cout << "File Open and ready" << std::endl;
+    throw(std::runtime_error("🚫 Error: Could not open the file 🚫"));
+  std::cout << GREEN << "✅ File Open and ready ✅" << RESET << std::endl;
   std::string line;
   while (std::getline(bitFile, line)) {
     std::istringstream iss(line);
@@ -50,13 +49,13 @@ void BitcoinExchange::readBitcoinFile(const std::string &fileName) {
 
 bool checker(const float &value) {
   if (value < 0) {
-    std::cout << BLUE << "Error value is not a positive number" << RESET
+    std::cout << BLUE << "🔵 Error: value is not a positive number 🔵" << RESET
               << std::endl;
     return (false);
   }
   if (value > 1000) {
-    std::cout << MAGENTA << "Error value Exceed the maxumum allowed" << RESET
-              << std::endl;
+    std::cout << MAGENTA << "🔺 Error: value exceeds the maximum allowed 🔺"
+              << RESET << std::endl;
     return (false);
   }
   return (true);
