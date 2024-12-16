@@ -6,23 +6,17 @@ int main(int arg, char *argv[])
     if (arg == 1)
         return 1;
 
+    // Creation of the bitcoin Class.
     BitcoinExchange bitConvert;
-
     bitConvert.readBitcoinFile("data.csv");
+    
     //2. Check the open file function.
-    std::cout << "// ______________ Before Output File ______________" << std::endl;
+    std::cout << GREEN <<  "// ______________ SEARCH FILE ______________" << RESET << std::endl;
     std::ifstream file1(argv[1]);
     std::string line1;
     while(std::getline(file1, line1))
         std::cout << line1 << std::endl;
 
+    std::cout << GREEN << "// ______________ After Output File ______________" << RESET << std::endl;
     bitConvert.readSearchingFile(argv[1]);
-    bitConvert.searchValue();
-    bitConvert.createOutputFile("argv[1]", bitConvert.getQueryData());
-
-    std::cout << "// ______________ After Output File ______________" << std::endl;
-    std::ifstream file("argv[1]");
-    std::string line;
-    while(std::getline(file, line))
-        std::cout << line << std::endl;
 }
