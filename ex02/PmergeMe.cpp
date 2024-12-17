@@ -35,12 +35,11 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &_src) {
 
 void PmergeMe::inputCheck(const std::string &val) {
 
-  std::cout << val << std::endl;
   int value;
   char *end;
 
   value = std::strtol(val.c_str(), &end, 10);
-  if (*end != '\0')
+  if (*end != '\0' || (value < 0))
     throw(std::runtime_error("Error not valid number"));
   _sortVector.push_back(value);
   _sortList.push_back(value);
@@ -69,13 +68,13 @@ void PmergeMe::mergeVector(int left, int mid, int right) {
                               _sortVector.begin() + mid + 1);
   std::vector<int> rightVector(_sortVector.begin() + mid + 1,
                                _sortVector.begin() + right + 1);
-  if (mid == (_sortVector.size() / 2)) {
+  // if (mid == (_sortVector.size() / 2)) {
 
-    std::cout << "Print Vector Left > " << std::endl;
-    print(leftVector);
-    std::cout << "Print Vector Right > " << std::endl;
-    print(rightVector);
-  }
+  //   std::cout << "Print Vector Left > " << std::endl;
+  //   print(leftVector);
+  //   std::cout << "Print Vector Right > " << std::endl;
+  //   print(rightVector);
+  // }
 
   size_t i = 0, j = 0, k = left;
 
@@ -121,9 +120,21 @@ void PmergeMe::runTimeManager() {
   clock_t startTme = clock();
   mergeSortVector(0, _sortVector.size() - 1);
   clock_t finishTime = clock();
+  double durationVec =
+      static_cast<double>(finishTime - startTme) / CLOCKS_PER_SEC;
+  clock_t startTmeL = clock();
   mergeSortList(_sortList);
-  std::cout << static_cast<double>(startTme - finishTime) / CLOCKS_PER_SEC
-            << " seconds" << std::endl;
+  clock_t finishTimeL = clock();
+  double durationList =
+      static_cast<double>(finishTimeL - startTmeL) / CLOCKS_PER_SEC;
+  std::cout << GREEN << "AFTER  : ";
+  print(_sortVector);
+
+  std::cout << CYAN << "Time to process with std::vector : " << durationVec << " seconds"
+            << std::endl;
+
+  std::cout<<MAGENTA<< "Time to process with std::list   : " << durationList << " seconds"
+            << std::endl;
 }
 std::list<int> PmergeMe::getList() { return (_sortList); }
 

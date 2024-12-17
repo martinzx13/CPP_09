@@ -25,26 +25,12 @@ int main(int argc, char *argv[]) {
     for (int i = 1; i < argc; i++)
       sorting.inputCheck(argv[i]);
 
-    std::cout << "::::::::::: STEP 1 PAIR SORT " << std::endl;
-    std::cout << YELLOW << "___________ Print List ____________" << std::endl;
+    std::cout << YELLOW << "BEFORE : ";
     print(sorting.getList());
-    std::cout << YELLOW << "___________ Print Swap ____________" << std::endl;
-    sorting.initialPairingList();
-    print(sorting.getList());
-    std::cout << MAGENTA << "___________ Print Vector ____________"
-              << std::endl;
-    print(sorting.getVector());
-    std::cout << YELLOW << "___________ Print Swap Vector ____________"
-              << std::endl;
-    sorting.initialPairingVector();
-    print(sorting.getVector());
 
-    std::cout << "::::::::::: STEP 3. Recursive Merging " << std::endl;
     sorting.runTimeManager();
-    print(sorting.getVector());
 
-    print(sorting.getList());
   } catch (std::exception &e) {
-    std::cout << e.what() << std::endl;
+    std::cout << RED << e.what() << RESET << std::endl;
   }
 }
