@@ -45,6 +45,7 @@ void BitcoinExchange::readBitcoinFile(const std::string &fileName) {
     }
     _bitcoinData[date] = value;
   }
+  bitFile.close();
 }
 
 bool checker(const float &value) {
@@ -123,6 +124,7 @@ void BitcoinExchange::readSearchingFile(const std::string &fileQuery) {
                 << std::endl;
     }
   }
+  query.close();
 }
 
 float BitcoinExchange::getPrice(const std::string &_date) {

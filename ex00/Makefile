@@ -35,4 +35,6 @@ fclean:clean
 
 re:fclean all
 
+val:re
+	valgrind --show-leak-kinds=all ./$(NAME) input.txt
 .PHONY: clean fclean re all
